@@ -170,7 +170,7 @@ const communityPosts = computed(() => communityData.value?.posts ?? [])
 const latestCommunityPost = computed(() => communityPosts.value[0] ?? null)
 
 useSeoMeta({
-  title: 'FeldupTV — Feldup\'s Content Hub',
-  description: 'Watch Feldup\'s YouTube videos, see Bluesky & Twitter updates, and browse community posts — all in one place.',
+  title: 'FeldupTV - Feldup\'s Content Hub',
+  description: 'Watch Feldup\'s YouTube videos, see Bluesky & Twitter updates, and browse community posts - all in one place.',
 })
 </script>

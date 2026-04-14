@@ -203,7 +203,7 @@ async function loadMoreBsky() {
 }
 
 useSeoMeta({
-  title: 'Posts — FeldupTV',
+  title: 'Posts - FeldupTV',
   description: 'Feldup\'s community posts, Bluesky updates, and Twitter feed all in one place.',
 })
 </script>

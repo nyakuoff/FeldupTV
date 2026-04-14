@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 sm:px-6 lg:px-8 py-6">
+  <div class="px-4 sm:px-6 lg:px-8 py-6 max-w-[1800px]">
     <div v-if="pending" class="grid lg:grid-cols-[1fr_380px] gap-6">
       <!-- Player skeleton -->
       <div class="flex flex-col gap-4">
@@ -18,6 +18,7 @@
           :description="video.description"
           :view-count="video.viewCount"
           :published-at="video.publishedAt"
+          :channel="channel"
         />
       </div>
 
@@ -45,6 +46,9 @@
 const route = useRoute()
 const videoId = computed(() => route.params.id as string)
 
+const { data: channelData } = await useChannel()
+const channel = computed(() => channelData.value)
+
 const { data, pending } = await useAsyncData(
   `watch-${videoId.value}`,
   () => $fetch<any>('/api/videos'),
@@ -56,7 +60,7 @@ const video = computed(() => allVideos.value.find((v: any) => v.id === videoId.v
 const relatedVideos = computed(() => allVideos.value.filter((v: any) => v.id !== videoId.value).slice(0, 15))
 
 useSeoMeta({
-  title: computed(() => video.value ? `${video.value.title} — FeldupTV` : 'Watch — FeldupTV'),
+  title: computed(() => video.value ? `${video.value.title} - FeldupTV` : 'Watch - FeldupTV'),
   description: computed(() => video.value?.description?.slice(0, 160) ?? 'Watch Feldup\'s videos on FeldupTV.'),
 })
 </script>

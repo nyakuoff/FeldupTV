@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
 
     const posts: any[] = (data.feed ?? [])
       .filter((item: any) => {
-        // Filter out reposts — only show Feldup's own posts
+        // Filter out reposts - only show Feldup's own posts
         return item.post?.author?.handle === BLUESKY_HANDLE
       })
       .map((item: any) => {

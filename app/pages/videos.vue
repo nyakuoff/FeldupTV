@@ -152,7 +152,7 @@ const filteredVideos = computed(() => {
 })
 
 useSeoMeta({
-  title: 'Videos — FeldupTV',
+  title: 'Videos - FeldupTV',
   description: 'Browse all of Feldup\'s YouTube videos. Filter by Shorts or long-form content.',
 })
 </script>

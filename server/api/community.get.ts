@@ -53,7 +53,7 @@ export default defineEventHandler(async () => {
 
     return { posts }
   } catch (err: any) {
-    // Graceful fallback — community posts may be temporarily unavailable
+    // Graceful fallback - community posts may be temporarily unavailable
     console.error('[community] Error:', err?.message ?? err)
     return { posts: [], error: 'Community posts temporarily unavailable' }
   }
