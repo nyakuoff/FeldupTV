@@ -79,7 +79,7 @@ ${recentBsky || 'aucun'}
 2. Les indices ou annonces sur le prochain épisode
 3. Toute autre activité récente notable
 
-Sois concis. N'utilise pas de puces ni de titres. Ne commence pas par "Feldup". Ne mentionne pas que c'est généré par une IA.`
+Sois concis. N'utilise pas de puces ni de titres. Ne commence pas par "Feldup". Ne mentionne pas que c'est généré par une IA. N'invente aucune date, aucun chiffre ni aucune information absente des données ci-dessus — si tu ne sais pas, ne dis rien. Si les données contiennent des spéculations ou rumeurs (de Feldup lui-même ou de la communauté), tu peux les mentionner mais en les présentant clairement comme telles (ex : "selon les rumeurs", "il semblerait que", "rien de confirmé mais…").`
 
   const apiUrl = `https://api.groq.com/openai/v1/chat/completions`
 
@@ -92,7 +92,7 @@ Sois concis. N'utilise pas de puces ni de titres. Ne commence pas par "Feldup". 
         'Authorization': `Bearer ${groqKey}`,
       },
       body: {
-        model: 'llama-3.1-8b-instant',
+        model: 'llama-3.3-70b-versatile',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 150,
         temperature: 0.4,
