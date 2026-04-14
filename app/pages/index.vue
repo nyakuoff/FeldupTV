@@ -3,6 +3,80 @@
     <LayoutChannelBanner :channel="channel" />
 
     <div class="px-4 sm:px-6 lg:px-8 py-6">
+      <!-- Quick keep-up section -->
+      <div class="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+        <!-- Latest video hero -->
+        <section>
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-base font-semibold" style="color: var(--yt-text-primary);">Latest Video</h2>
+            <NuxtLink to="/videos" class="text-sm" style="color: var(--feldup-accent-light);">All videos →</NuxtLink>
+          </div>
+
+          <div v-if="videoPending" class="h-[260px] rounded-2xl skeleton" />
+
+          <NuxtLink
+            v-else-if="latestVideo"
+            :to="`/watch/${latestVideo.id}`"
+            class="group block rounded-2xl overflow-hidden no-underline"
+            style="border: 1px solid var(--yt-border); background-color: var(--yt-bg-secondary);"
+          >
+            <div class="relative w-full" style="aspect-ratio: 16 / 9;">
+              <img
+                v-if="latestVideo.thumbnail"
+                :src="latestVideo.thumbnail"
+                :alt="latestVideo.title"
+                class="w-full h-full object-cover transition-all duration-300 group-hover:scale-[1.02] group-hover:brightness-105"
+                loading="lazy"
+              />
+              <div
+                v-else
+                class="w-full h-full flex items-center justify-center"
+                style="background-color: var(--yt-bg-tertiary);"
+              >
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="currentColor" style="color: var(--yt-text-muted);">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+
+              <span
+                v-if="latestVideo.durationText"
+                class="absolute bottom-2 right-2 px-2 py-1 rounded-md text-xs font-semibold"
+                style="background-color: rgba(0,0,0,0.8); color: #fff;"
+              >
+                {{ latestVideo.durationText }}
+              </span>
+            </div>
+
+            <div class="p-3">
+              <p class="text-lg font-semibold leading-snug" style="color: var(--yt-text-primary);">
+                {{ latestVideo.title }}
+              </p>
+              <p class="text-xs mt-1.5" style="color: var(--yt-text-secondary);">
+                {{ formatViews(latestVideo.viewCount) }} · {{ formatRelativeDate(latestVideo.publishedAt) }}
+              </p>
+            </div>
+          </NuxtLink>
+        </section>
+
+        <!-- Latest community post -->
+        <section>
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-base font-semibold" style="color: var(--yt-text-primary);">Latest Community Post</h2>
+            <NuxtLink to="/posts?tab=community" class="text-sm" style="color: var(--feldup-accent-light);">See all →</NuxtLink>
+          </div>
+
+          <div v-if="communityPending" class="h-[260px] rounded-2xl skeleton" />
+
+          <div v-else-if="latestCommunityPost" class="max-h-[420px] overflow-auto pr-1">
+            <SocialCommunityPost :post="latestCommunityPost" />
+          </div>
+
+          <div v-else class="rounded-xl p-4 text-sm" style="color: var(--yt-text-secondary); border: 1px solid var(--yt-border); background-color: var(--yt-bg-secondary);">
+            No recent community post available.
+          </div>
+        </section>
+      </div>
+
       <!-- Section header -->
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg font-semibold" style="color: var(--yt-text-primary);">Recent Videos</h2>
@@ -11,7 +85,7 @@
         </NuxtLink>
       </div>
 
-      <VideoGrid :videos="videos" :loading="videoPending" :skeleton-count="12" :channel-avatar="channel?.avatar" />
+      <VideoGrid :videos="recentVideos" :loading="videoPending" :skeleton-count="12" :channel-avatar="channel?.avatar" />
 
       <!-- Social preview strip -->
       <div class="mt-10 grid gap-6 md:grid-cols-2">
@@ -66,6 +140,8 @@
 
 <script setup lang="ts">
 definePageMeta({ pageTransition: false })
+import { formatViews, formatRelativeDate } from '~/utils/formatters'
+
 const { data: channelData } = await useChannel()
 const channel = computed(() => channelData.value)
 
@@ -75,6 +151,8 @@ const { data: videoData, pending: videoPending } = await useAsyncData(
   { server: true }
 )
 const videos = computed(() => videoData.value?.videos ?? [])
+const latestVideo = computed(() => videos.value[0] ?? null)
+const recentVideos = computed(() => videos.value.slice(1))
 
 const { data: bskyData, pending: bskyPending } = await useAsyncData(
   'home-bluesky',
@@ -89,6 +167,7 @@ const { data: communityData, pending: communityPending, error: communityError } 
   { server: true, lazy: true }
 )
 const communityPosts = computed(() => communityData.value?.posts ?? [])
+const latestCommunityPost = computed(() => communityPosts.value[0] ?? null)
 
 useSeoMeta({
   title: 'FeldupTV — Feldup\'s Content Hub',
