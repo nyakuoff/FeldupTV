@@ -55,7 +55,7 @@
       <div
         class="text-sm whitespace-pre-wrap"
         style="color: var(--yt-text-primary);"
-        :class="expanded ? '' : 'line-clamp-3'"
+        :class="expanded ? '' : 'line-clamp-20'"
       >
         {{ description || 'No description.' }}
       </div>
