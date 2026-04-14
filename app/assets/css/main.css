@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --yt-bg-primary: #0a0a0a;
+  --yt-bg-secondary: #111111;
+  --yt-bg-tertiary: #1c1c1c;
+  --yt-bg-hover: #252525;
+  --yt-text-primary: #f0f0f0;
+  --yt-text-secondary: #999999;
+  --yt-text-muted: #5a5a5a;
+  --yt-border: rgba(255, 255, 255, 0.08);
+  --yt-red: #ff0000;
+  --yt-red-hover: #cc0000;
+  --feldup-accent: #ff0000;
+  --feldup-accent-light: #ff4444;
+  --header-height: 58px;
+  --sidebar-width: 210px;
+  --sidebar-mini-width: 64px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--yt-bg-primary);
+  color: var(--yt-text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--yt-bg-secondary) 20%,
+    var(--yt-bg-tertiary) 50%,
+    var(--yt-bg-secondary) 80%
+  );
+  background-size: 1200px 100%;
+  animation: shimmer 1.8s infinite linear;
+  border-radius: var(--radius-card);
+}
+
+/* Page transitions */
+.page-enter-active { transition: opacity 0.18s ease, transform 0.18s var(--ease-out-quart); }
+.page-leave-active { transition: opacity 0.12s ease; }
+.page-enter-from   { opacity: 0; transform: translateY(6px); }
+.page-leave-to     { opacity: 0; }
+
+/* Line clamp */
+.line-clamp-1 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+.line-clamp-2 { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+/* Focus ring */
+:focus-visible { outline: 2px solid var(--feldup-accent); outline-offset: 2px; }
+
+/* Compact density mode */
+html.density-compact body { font-size: 13px; }
+html.density-compact .py-6 { padding-top: 16px !important; padding-bottom: 16px !important; }
+html.density-compact .gap-4 { gap: 12px !important; }
+html.density-compact .gap-6 { gap: 16px !important; }
+
+/* Spacious density mode */
+html.density-spacious body { font-size: 15px; }
+html.density-spacious .py-6 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+html.density-spacious .gap-4 { gap: 1.25rem !important; }
+html.density-spacious .gap-6 { gap: 1.75rem !important; }
