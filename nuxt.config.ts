@@ -9,6 +9,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     youtubeApiKey: process.env.YOUTUBE_API_KEY,
+    geminiApiKey: process.env.GEMINI_API_KEY,
+    groqApiKey: process.env.GROQ_API_KEY,
     // public values are exposed to the client - keep empty here
     public: {},
   },
@@ -23,6 +25,7 @@ export default defineNuxtConfig({
       '/api/videos': { cache: { maxAge: 1800 } },
       '/api/community': { cache: { maxAge: 1800 } },
       '/api/bluesky': { cache: { maxAge: 300 } },
+      // /api/summary uses globalThis in-process caching — no Nitro cache needed
     },
   },
 })

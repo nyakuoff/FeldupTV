@@ -3,8 +3,18 @@
     <LayoutChannelBanner :channel="channel" />
 
     <div class="px-4 sm:px-6 lg:px-8 py-6">
+      <!-- AI Summary -->
+      <div class="mb-6">
+        <ClientOnly>
+          <AiSummary />
+          <template #fallback>
+            <div class="rounded-2xl px-4 py-3.5 h-[52px]" style="background-color: var(--yt-bg-secondary); border: 1px solid var(--yt-border);" />
+          </template>
+        </ClientOnly>
+      </div>
+
       <!-- Quick keep-up section -->
-      <div class="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+      <div class="mb-8 grid gap-4 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
         <!-- Latest video hero -->
         <section>
           <div class="flex items-center justify-between mb-3">
@@ -12,7 +22,7 @@
             <NuxtLink to="/videos" class="text-sm" style="color: var(--feldup-accent-light);">All videos →</NuxtLink>
           </div>
 
-          <div v-if="videoPending" class="h-[260px] rounded-2xl skeleton" />
+          <div v-if="videoPending" class="h-[200px] rounded-2xl skeleton" />
 
           <NuxtLink
             v-else-if="latestVideo"
@@ -47,11 +57,11 @@
               </span>
             </div>
 
-            <div class="p-3">
-              <p class="text-lg font-semibold leading-snug" style="color: var(--yt-text-primary);">
+            <div class="p-2.5">
+              <p class="text-sm font-semibold leading-snug" style="color: var(--yt-text-primary);">
                 {{ latestVideo.title }}
               </p>
-              <p class="text-xs mt-1.5" style="color: var(--yt-text-secondary);">
+              <p class="text-xs mt-1" style="color: var(--yt-text-secondary);">
                 {{ formatViews(latestVideo.viewCount) }} · {{ formatRelativeDate(latestVideo.publishedAt) }}
               </p>
             </div>
