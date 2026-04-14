@@ -1,15 +1,17 @@
 <template>
   <div>
-    <!-- Vidstack player -->
-    <media-player
-      class="player"
-      :title="title"
-      :src="`youtube/${videoId}`"
-      playsInline
-    >
-      <media-provider />
-      <media-video-layout color-scheme="dark" />
-    </media-player>
+    <!-- Native YouTube embed -->
+    <div class="w-full overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+      <iframe
+        :src="`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&vq=hd1080`"
+        class="w-full h-full"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        :title="title"
+      />
+    </div>
 
     <!-- Title -->
     <h1 class="mt-3 text-base sm:text-xl font-semibold leading-snug" style="color: var(--yt-text-primary);">
@@ -81,12 +83,6 @@
 </template>
 
 <script setup lang="ts">
-import 'vidstack/player/styles/default/theme.css'
-import 'vidstack/player/styles/default/layouts/video.css'
-import 'vidstack/player'
-import 'vidstack/player/layouts'
-import 'vidstack/player/ui'
-
 import { formatViews, formatFullDate } from '~/utils/formatters'
 import type { ChannelInfo } from '~/composables/useChannel'
 
@@ -112,15 +108,4 @@ const channelSubs = computed(() => {
 })
 </script>
 
-<style>
-.player {
-  --video-brand: var(--feldup-accent, #22c55e);
-  --video-focus-ring-color: var(--feldup-accent, #22c55e);
-  --video-border-radius: 12px;
-}
 
-.player[data-view-type='video'] {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-}
-</style>

@@ -5,11 +5,7 @@ export default defineNuxtConfig({
 
   modules: ['@nuxtjs/tailwindcss'],
 
-  vue: {
-    compilerOptions: {
-      isCustomElement: (tag) => tag.startsWith('media-'),
-    },
-  },
+
 
   runtimeConfig: {
     youtubeApiKey: process.env.YOUTUBE_API_KEY,
