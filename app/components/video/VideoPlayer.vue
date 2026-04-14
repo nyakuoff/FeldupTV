@@ -19,28 +19,17 @@
     </h1>
 
     <!-- Stats + watch on YT -->
-    <div class="flex flex-wrap items-center justify-between gap-2 mt-1.5">
+    <div class="mt-1.5">
       <p class="text-xs" style="color: var(--yt-text-secondary);">
         <span v-if="viewCount">{{ formatViews(viewCount) }}</span>
         <span v-if="publishedAt"> · {{ formatFullDate(publishedAt) }}</span>
       </p>
-      <a
-        :href="`https://www.youtube.com/watch?v=${videoId}`"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-opacity hover:opacity-80"
-        style="background-color: var(--yt-bg-tertiary); color: var(--yt-text-primary);"
-      >
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color: var(--yt-red);">
-          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0C.488 3.45.029 5.804 0 12c.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0C23.512 20.55 23.971 18.196 24 12c-.029-6.185-.484-8.549-4.385-8.816zM9 16V8l8 3.993L9 16z"/>
-        </svg>
-        Watch on YouTube
-      </a>
     </div>
 
     <!-- Channel row -->
-    <div
-      class="flex items-center gap-3 mt-3 pb-3"
+    <NuxtLink
+      to="/"
+      class="flex items-center gap-3 mt-3 pb-3 group"
       style="border-bottom: 1px solid var(--yt-border);"
     >
       <img
@@ -56,10 +45,10 @@
         style="background: var(--feldup-accent);"
       >F</div>
       <div>
-        <p class="text-sm font-semibold" style="color: var(--yt-text-primary);">{{ channelName }}</p>
+        <p class="text-sm font-semibold transition-colors group-hover:underline" style="color: var(--yt-text-primary);">{{ channelName }}</p>
         <p v-if="channelSubs" class="text-xs" style="color: var(--yt-text-secondary);">{{ channelSubs }} subscribers</p>
       </div>
-    </div>
+    </NuxtLink>
 
     <!-- Description -->
     <div class="mt-3 rounded-xl p-3" style="background-color: var(--yt-bg-secondary);">

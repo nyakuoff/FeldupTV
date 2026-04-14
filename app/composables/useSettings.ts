@@ -6,9 +6,9 @@ export interface Settings {
 }
 
 export const ACCENT_PRESETS: { label: string; value: string; light: string }[] = [
+  { label: 'Green',  value: '#22c55e', light: '#4ade80' },
   { label: 'Red',    value: '#ff0000', light: '#ff4444' },
   { label: 'Blue',   value: '#3b82f6', light: '#60a5fa' },
-  { label: 'Green',  value: '#22c55e', light: '#4ade80' },
   { label: 'Purple', value: '#a855f7', light: '#c084fc' },
   { label: 'Orange', value: '#f97316', light: '#fb923c' },
 ]

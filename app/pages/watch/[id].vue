@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 sm:px-6 lg:px-8 py-6 max-w-[1800px]">
+  <div class="px-4 sm:px-6 lg:px-8 py-6 max-w-[1700px]">
     <div v-if="pending" class="grid lg:grid-cols-[1fr_380px] gap-6">
       <!-- Player skeleton -->
       <div class="flex flex-col gap-4">
