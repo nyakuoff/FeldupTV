@@ -86,10 +86,10 @@ ${recentNotes || 'aucune'}
 
 Écris un résumé court et sympa de 2–3 phrases en français pour les fans qui visitent le site. Concentre-toi sur :
 1. Le numéro et la date du dernier épisode de Findings
-2. Les indices ou annonces sur le prochain épisode
+2. Les indices ou annonces sur le prochain épisode — si plusieurs projets Findings sont en cours, cite-les explicitement par leur nom ou sujet (ex : "Findings sur Hollow Knight", "Findings sur GTA VI") plutôt que de dire vaguement "plusieurs projets"
 3. Toute autre activité récente notable
 
-Sois concis. N'utilise pas de puces ni de titres. Ne commence pas par "Feldup". Ne mentionne pas que c'est généré par une IA. N'invente aucune date, aucun chiffre ni aucune information absente des données ci-dessus — si tu ne sais pas, ne dis rien. Si les données contiennent des spéculations ou rumeurs (de Feldup lui-même ou de la communauté), tu peux les mentionner mais en les présentant clairement comme telles (ex : "selon les rumeurs", "il semblerait que", "rien de confirmé mais…").`
+Sois concis. N'utilise pas de puces ni de titres. Ne commence pas par "Feldup". Ne mentionne pas que c'est généré par une IA. N'invente aucune date, aucun chiffre ni aucune information absente des données ci-dessus — si tu ne sais pas, ne dis rien. Si les données contiennent des spéculations ou rumeurs (de Feldup lui-même ou de la communauté), tu peux les mentionner mais en les présentant clairement comme telles (ex : "selon les rumeurs", "il semblerait que", "rien de confirmé mais…"). Ne regroupe jamais plusieurs projets sous une formulation vague comme "plusieurs Findings en cours" — nomme-les toujours un par un.`
 
   const apiUrl = `https://api.groq.com/openai/v1/chat/completions`
 
