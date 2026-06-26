@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@upstash/redis": "^1.38.0",
     "nuxt": "^4.4.2",
     "plyr": "^3.8.4",
     "vidstack": "^1.12.13",

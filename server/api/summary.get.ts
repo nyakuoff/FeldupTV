@@ -59,6 +59,13 @@ export default defineEventHandler(async (event) => {
     `- [${p.indexedAt?.slice(0, 10) ?? '?'}] ${p.text?.slice(0, 200) ?? '(no text)'}`
   ).join('\n')
 
+  // Manual notes added by the admin (e.g. news Feldup posted that the
+  // automated sources can't pick up). These are treated as authoritative.
+  const adminNotes = await readNotes()
+  const recentNotes = adminNotes.slice(0, 10).map((n) =>
+    `- [${n.createdAt?.slice(0, 10) ?? '?'}] ${n.text}`
+  ).join('\n')
+
   const today = new Date().toISOString().slice(0, 10)
 
   const prompt = `Tu es un assistant qui résume l'actualité du créateur YouTube français Feldup (UCQVaKQcp4OxSg1eC6SF3NTw). Sa série phare s'appelle "Findings" — des épisodes numérotés où il traite de l'actualité et du lore du jeu vidéo. Les fans veulent savoir : quoi de neuf en ce moment, et c'est pour quand le prochain Findings ?
@@ -73,6 +80,9 @@ ${recentPosts || 'aucun'}
 
 Posts Bluesky récents :
 ${recentBsky || 'aucun'}
+
+Notes ajoutées manuellement par l'admin du site (informations fiables et prioritaires, par ex. des actus annoncées par Feldup que les sources automatiques ne captent pas) :
+${recentNotes || 'aucune'}
 
 Écris un résumé court et sympa de 2–3 phrases en français pour les fans qui visitent le site. Concentre-toi sur :
 1. Le numéro et la date du dernier épisode de Findings
